@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de EPI - PROUT</title>
+    <link rel="stylesheet" href="css/gestao-epi.css">
+    <link rel="icon" type="image/png" href="IMGS/logo32.png">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="logo" id="companyName">Nome da Empresa</div>
+            <a href="dashboard.html" class="btn-back">Voltar</a>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+    
+        <div id="graph-container"></div>
+
+        <div id="planilha-container" style="display: none;">
+            <div class="planilha-header">
+                <h2>Visão Geral dos Funcionários</h2>
+            </div>
+            <div class="table-wrapper">
+                <table class="planilha-table">
+                    <thead>
+                        <tr>
+                            <th>Nome do Funcionário</th>
+                            <th>Supervisor</th>
+                            <th>Usa EPI</th>
+                            <th>Contato</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planilha-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <h2>Ações</h2>
+                <div class="search-container">
+                    <label for="searchInput" class="visually-hidden"></label>
+                    <input type="search" id="searchInput" placeholder="Buscar funcionário...">
+                </div>
+                <button id="btnAddFuncionario" class="action-btn">Adicionar Funcionário</button>
+                <button id="btnRemoveFuncionario" class="action-btn">Remover Funcionário</button>
+                <button id="btnEditMode" class="action-btn secondary">Ativar Modo Edição</button>
+                <hr>
+                <button id="btnViewMode" class="action-btn secondary">Ver em Modo Planilha</button>
+                <hr>
+                <button id="btnRelatorioGeral" class="action-btn">Gerar Relatório Geral</button>
+                <button id="btnAjuda" class="action-btn help-btn">Ajuda e Instruções</button>
+
+                <div class="logo-container-sidebar">
+                    <img src="IMGS/LOGO.png" alt="Logo PROUT" class="prout-logo-footer">
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Modal de Detalhes / Relatório -->
+    <div id="detailsModal" class="modal-overlay">
+        <div class="modal-content">
+            <span id="closeModalBtn" class="close-btn">&times;</span>
+            <h2 id="modalTitle">Detalhes do Funcionário</h2>
+            <div class="modal-body">
+                <div class="time-slider-container">
+                    <label for="timeRangeSlider">Período:</label>
+                    <input type="range" id="timeRangeSlider" min="0" max="4" value="2" step="1">
+                    <span id="timeRangeLabel">Últimos 30 Dias</span>
+                </div>
+                <div class="report-summary-container" id="reportSummary">
+                </div>
+
+                <div class="tabs-container">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="duration">Análise por Dia</button>
+                        <button class="tab-btn" data-tab="events">Registro Completo</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="tab-duration">
+                        <div class="chart-container">
+                            <canvas id="durationChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-events">
+                        <div class="table-container">
+                            <h3>Todos os Eventos Registrados</h3>
+                            <table id="reportTable">
+                                <thead></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-container">
+                     <h3>Localização em Tempo Real</h3>
+                    <button id="btnRequestLocation" class="btn-confirm primary">Verificar Localização Agora</button>
+                    <p id="locationStatus">Clique no botão para obter a localização atual do dispositivo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Outros Modais -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-content small">
+            <h2 id="confirmTitle">Confirmar Ação</h2>
+            <p id="confirmText">Deseja confirmar?</p>
+            <div class="confirm-buttons">
+                <button id="confirmBtnCancel" class="btn-confirm secondary">Cancelar</button>
+                <button id="confirmBtnOk" class="btn-confirm primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="addEditModal" class="modal-overlay">
+        <div class="modal-content">
+            <span id="closeAddEditModalBtn" class="close-btn">&times;</span>
+            <h2 id="addEditModalTitle">Adicionar Novo Funcionário</h2>
+            <form id="addEditForm">
+                <input type="hidden" id="func-id">
+                
+                <div class="form-step active" data-step="1">
+                    <h3>Passo 1: Identificação</h3>
+                    <div class="input-group"><label for="func-nome">Nome Completo</label><input type="text" id="func-nome" required></div>
+                    <div class="input-group"><label for="func-contato">Telegram Chat ID para Notificações</label><input type="text" id="func-contato" placeholder="Ex: 123456789 (obtenha com @userinfobot)" required></div>
+                </div>
+
+                <div class="form-step" data-step="2">
+                    <h3>Passo 2: Hierarquia</h3>
+                    <div class="input-group">
+                        <label>Este funcionário é um supervisor?</label>
+                        <div class="radio-group">
+                            <input type="radio" id="is-supervisor-sim" name="isSupervisor" value="true"><label for="is-supervisor-sim">Sim</label>
+                            <input type="radio" id="is-supervisor-nao" name="isSupervisor" value="false" checked><label for="is-supervisor-nao">Não</label>
+                        </div>
+                    </div>
+                    <div class="input-group" id="supervisor-select-group">
+                        <label for="func-supervisor">Vincular ao Supervisor</label>
+                        <select id="func-supervisor"></select>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="3">
+                    <h3>Passo 3: Equipamento e Horários</h3>
+                    <div class="input-group">
+                        <label>Usará o capacete (EPI)?</label>
+                        <div class="radio-group">
+                            <input type="radio" id="usa-capacete-sim" name="usaCapacete" value="true" checked><label for="usa-capacete-sim">Sim</label>
+                            <input type="radio" id="usa-capacete-nao" name="usaCapacete" value="false"><label for="usa-capacete-nao">Não</label>
+                        </div>
+                    </div>
+                    <div id="epi-fields">
+                        <div class="input-group"><label for="func-uid">UID do Crachá RFID</label><input type="text" id="func-uid" placeholder="XX XX XX XX"></div>
+                        <div class="input-group">
+                            <label>Terá horário de almoço?</label>
+                            <div class="radio-group">
+                                <input type="radio" id="tem-almoco-sim" name="temAlmoco" value="true" checked><label for="tem-almoco-sim">Sim</label>
+                                <input type="radio" id="tem-almoco-nao" name="temAlmoco" value="false"><label for="tem-almoco-nao">Não</label>
+                            </div>
+                        </div>
+                        <div id="almoco-fields">
+                            <div class="input-group"><label for="func-h-saida-almoco">Saída para Almoço (HH:mm)</label><input type="text" id="func-h-saida-almoco" placeholder="12:00"></div>
+                            <div class="input-group"><label for="func-h-retorno-almoco">Retorno do Almoço (HH:mm)</label><input type="text" id="func-h-retorno-almoco" placeholder="13:00"></div>
+                        </div>
+                        <div class="input-group"><label for="func-h-entrada">Horário de Entrada (HH:mm)</label><input type="text" id="func-h-entrada" placeholder="08:00"></div>
+                        <div class="input-group"><label for="func-h-saida">Horário de Saída (HH:mm)</label><input type="text" id="func-h-saida" placeholder="18:00"></div>
+                        <div class="input-group"><label for="func-tolerancia">Tolerância de Atraso (minutos)</label><input type="text" id="func-tolerancia" placeholder="15" value="15"></div>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" id="btnPrev" class="btn-form-nav secondary">Anterior</button>
+                    <button type="button" id="btnNext" class="btn-form-nav primary">Próximo</button>
+                    <button type="submit" id="btnSubmit" class="btn-form-nav primary" style="display: none;">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="supervisorModal" class="modal-overlay">
+        <div class="modal-content small">
+            <span id="closeSupervisorModalBtn" class="close-btn">&times;</span>
+            <h2>Alterar Supervisor</h2>
+            <div class="supervisor-modal-body">
+                <p>Vincular funcionário <strong id="employeeNameToChange"></strong> ao supervisor:</p>
+                <div class="input-group">
+                    <select id="supervisor-select-modal"></select>
+                </div>
+            </div>
+            <div class="confirm-buttons">
+                <button id="supervisorChangeCancel" class="btn-confirm secondary">Cancelar</button>
+                <button id="supervisorChangeOk" class="btn-confirm primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="simulacaoModal" class="modal-overlay">
+        <div class="modal-content small">
+            <span id="closeSimulacaoModalBtn" class="close-btn">&times;</span>
+            <h2>Simular Jornada de Trabalho</h2>
+            <div class="simulacao-body">
+                <div class="input-group">
+                    <label for="simulacao-funcionario-select">Funcionário</label>
+                    <select id="simulacao-funcionario-select"></select>
+                </div>
+                <div class="input-group">
+                    <label for="simulacao-velocidade-select">Velocidade</label>
+                    <select id="simulacao-velocidade-select">
+                        <option value="60" selected>Rápido (1 min = 1 seg)</option>
+                        <option value="300">Muito Rápido (5 min = 1 seg)</option>
+                        <option value="600">Ultra Rápido (10 min = 1 seg)</option>
+                        <option value="1">Tempo Real (Lento)</option>
+                    </select>
+                </div>
+                 <p id="simulacao-status" style="font-size: 0.9em; color: var(--text-light);"></p>
+            </div>
+            <div class="confirm-buttons">
+                <button id="simulacaoBtnCancel" class="btn-confirm secondary">Fechar</button>
+                <button id="simulacaoBtnOk" class="btn-confirm primary">Iniciar Simulação</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="ajudaModal" class="modal-overlay">
+        <div class="modal-content">
+            <span id="closeAjudaModalBtn" class="close-btn">&times;</span>
+            <h2>Ajuda e Instruções</h2>
+            <div class="ajuda-content">
+                <h3>Legenda dos Status</h3>
+                <p>Ao lado do nome de cada funcionário, você verá um indicador colorido em tempo real:</p>
+                <ul>
+                    <li><strong style="color: var(--status-green);">Verde:</strong> Funcionário em horário de trabalho e com o capacete ativo.</li>
+                    <li><strong style="color: var(--status-red);">Vermelho:</strong> Funcionário em horário de trabalho, mas o capacete não foi detectado (pode ter sido removido ou está offline).</li>
+                    <li><strong style="color: var(--status-blue);">Azul:</strong> Funcionário em horário de trabalho, mas aguardando a conexão inicial do capacete (ainda não bateu o ponto de entrada).</li>
+                    <li><strong style="color: var(--status-yellow);">Amarelo:</strong> Funcionário com EPI, mas fora do seu horário de trabalho ou em horário de almoço.</li>
+                    <li><strong style="color: var(--status-gray);">Cinza:</strong> Funcionário que não utiliza o capacete EPI.</li>
+                </ul>
+                <hr>
+                <h3>Como verificar a localização de um funcionário?</h3>
+                <ol>
+                    <li>Clique sobre um funcionário (no modo quadro ou na linha da planilha) para abrir a janela de detalhes/relatório.</li>
+                    <li>Se o funcionário utilizar um EPI rastreável, você verá um botão <strong>"Verificar Localização Agora"</strong>.</li>
+                    <li>Clique no botão. O sistema enviará um comando para o capacete, que responderá com suas coordenadas GPS mais recentes.</li>
+                    <li>A localização (latitude e longitude) e um link para o mapa aparecerão logo abaixo do botão.</li>
+                    <li><strong>Atenção:</strong> A precisão do GPS depende da qualidade do sinal. Em locais fechados ou com muitas obstruções, pode não ser possível obter uma localização exata.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/gestao-epi.js"></script>
+</body>
+</html>

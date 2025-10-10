@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Serviços - PROUT</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="icon" type="image/png" href="IMGS/logo32.png">
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <div class="container">
+            <a href="dashboard.html" class="logo">
+                <img src="IMGS/LOGO.png" alt="Ícone PROUT">
+                <span id="companyLogo">Sua Empresa</span>
+            </a>
+            <nav>
+                <a href="#" id="signOutBtn" class="btn-sign-out">Sair</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container content-wrapper">
+            <div class="text-content">
+                <h1 id="serviceTitle">
+                    <span class="short-name">MIDA</span>
+                    <span class="full-name">Monitoramento Inteligente e Detecção Automática</span>
+                </h1>
+                <p id="serviceDescription">
+                    Controle de acesso por reconhecimento facial para garantir que apenas pessoal autorizado entre em áreas restritas além de verificar se o funcionario esta usando seu capacete.
+                </p>
+                <div class="action-buttons">
+<a href="mida.html" id="btnCameras" class="service-btn active">MIDA</a>
+                    <button id="btnEPI" class="service-btn">MIPE</button>
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="IMGS/MIDA.png" alt="Ilustração do serviço" id="serviceImage">
+            </div>
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crie sua Conta - PROUT SITE</title>
+    <link rel="icon" type="image/png" href="IMGS/logo32.png">
+    <link rel="stylesheet" href="css/registro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="register-container">
+        <div class="left-panel">
+            <div class="logo-container">
+                <img src="IMGS/LOGO.png" alt="Logo PROUT" class="left-panel-logo">
+            </div>
+            <div class="left-panel-content">
+                <h1>Junte-se a Nós.<br>Inove com Segurança.</h1>
+                <p>PROUT</p>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="form-header">
+                <a href="index.html" class="logo">
+                
+                    <span>PROUT</span>
+                </a>
+                <p>Já tem uma conta? <a href="index.html" class="login-link">Faça o login!</a></p>
+            </div>
+
+            <div class="form-content">
+                <h2>Crie sua Conta Hoje Mesmo</h2>
+                <form id="registerForm">
+                    <div class="form-grid">
+                        <div class="input-group full-width">
+                            <input type="text" id="company-name" placeholder=" " required>
+                            <label for="company-name">Nome da Empresa</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" id="cnpj" placeholder=" " required>
+                            <label for="cnpj">CNPJ</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" id="cnae" placeholder=" " required>
+                            <label for="cnae">CNAE Principal</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" id="ie" placeholder=" ">
+                            <label for="ie">Inscrição Estadual (Opcional)</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" id="im" placeholder=" ">
+                            <label for="im">Inscrição Municipal (Opcional)</label>
+                        </div>
+
+                        <div class="input-group full-width">
+                            <input type="email" id="email" placeholder=" " required>
+                            <label for="email">Email de Contato</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="password" id="password" placeholder=" " required>
+                            <label for="password">Crie uma Senha</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="password" id="confirm-password" placeholder=" " required>
+                            <label for="confirm-password">Confirme a Senha</label>
+                        </div>
+                    </div>
+
+                    <div class="terms">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">Criando sua conta você aceita nossos <a href="politica.html" target="_blank">Termos & Condições</a>.</label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Criar Conta</button>
+                </form>
+                <p class="copyright">&copy; 2025 PROUT Inc Ltd.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/registro.js"></script>
+    <div id="popupOverlay" class="popup-overlay">
+        
+        <div id="successPopup" class="popup-content">
+            <div class="popup-icon success">✔</div>
+            <h2>Registro Concluído!</h2>
+            <p>Sua empresa foi registrada com sucesso. Você será redirecionado para a página de login em breve.</p>
+            <button id="closeSuccessPopup" class="popup-button">OK</button>
+        </div>
+
+        <div id="errorPopup" class="popup-content">
+            <div class="popup-icon error">!</div>
+            <h2>Erro no Registro</h2>
+            <p>O endereço de e-mail fornecido já está em uso. Por favor, tente com outro e-mail ou faça o login.</p>
+            <button id="closeErrorPopup" class="popup-button">Tentar Novamente</button>
+        </div>
+
+    </div>
+
+</body>
+</html>
