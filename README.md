@@ -7,6 +7,7 @@ Este repositório contém o desenvolvimento do nosso site para o projeto de capa
 O principal objetivo é reduzir drasticamente o tempo de resposta em caso de acidentes e monitorar o uso correto de Equipamentos de Proteção Individual (EPIs), salvando vidas e garantindo a conformidade com as normas de segurança.
 
 ✨ Funcionalidades Principais
+
 🤕 Detecção de Queda: Utiliza sensores para detectar quedas bruscas com um sistema de confirmação em duas etapas (2FA) via notificação para minimizar alarmes falsos.
 
 📍 Localização em Tempo Real: Módulo GPS integrado para rastreamento da localização exata do trabalhador, crucial para equipes de resgate em áreas amplas ou remotas.
