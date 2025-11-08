@@ -6,7 +6,7 @@ Este repositório contém o desenvolvimento do nosso site para o projeto de capa
 
 O principal objetivo é reduzir drasticamente o tempo de resposta em caso de acidentes e monitorar o uso correto de Equipamentos de Proteção Individual (EPIs), salvando vidas e garantindo a conformidade com as normas de segurança.
 
-✨ Funcionalidades Principais
+## ✨ Funcionalidades Principais ##
 
 🤕 Detecção de Queda: Utiliza sensores para detectar quedas bruscas com um sistema de confirmação em duas etapas (2FA) via notificação para minimizar alarmes falsos.
 
@@ -33,7 +33,7 @@ Backend (Node-RED): Um servidor que se inscreve nos tópicos MQTT, recebe os dad
 
 Frontend (Dashboard Web): Uma interface de usuário construída em HTML, CSS e JavaScript que consome a API do backend para exibir os dados de forma visual e interativa para os gestores.
 
-🚀 Próximos Passos (Roadmap)
+## 🚀 Próximos Passos ##
 Integrar o sistema de notificações com o Microsoft Teams através de Webhooks.
 
 Desenvolver e treinar uma rede neural para detecção de anomalias ou reconhecimento de uso de EPIs a partir de câmeras.
