@@ -1,6 +1,6 @@
-Este é o PROUT - Projeto Capacete de Segurança Inteligente
+# PROUT - O Projeto Capacete de Segurança Inteligente #
 
-🏆 Projeto premiado com o 3º lugar na competição Inova SENAI 2025! 🏆
+## 🏆 Projeto premiado com o 3º lugar na competição Inova SENAI 2025! 🏆 ##
 
 Este repositório contém o desenvolvimento do nosso site para o projeto de capacete de segurança inteligente, uma solução de IoT projetada para aumentar a segurança de trabalhadores em ambientes industriais, de mineração e em locais isolados.
 
