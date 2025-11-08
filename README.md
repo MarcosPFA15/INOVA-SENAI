@@ -25,11 +25,9 @@ O principal objetivo é reduzir drasticamente o tempo de resposta em caso de aci
 🏗️ Arquitetura do Sistema
 A solução opera em quatro camadas principais:
 
-Hardware (O Capacete): Um microcontrolador como cérebro, conectado a sensores e um sistema de rádio ou wifi para comunicação.
+📲 Hardware (O Capacete): Um microcontrolador como cérebro, conectado a sensores e um sistema de rádio ou wifi para comunicação.
 
-Comunicação (MQTT): Os capacetes publicam seus dados e eventos em um Broker MQTT, um protocolo leve e eficiente ideal para IoT.
-
-Backend (Node-RED): Um servidor que se inscreve nos tópicos MQTT, recebe os dados, processa todas as regras de negócio (verifica horários, valida alertas, etc.), armazena as informações e as expõe através de uma API.
+📶 Comunicação (MQTT): Os capacetes publicam seus dados e eventos em um Broker MQTT, um protocolo leve e eficiente ideal para IoT Backend (Node-RED): Um servidor que se inscreve nos tópicos MQTT, recebe os dados, processa todas as regras de negócio (verifica horários, valida alertas, etc.), armazena as informações e as expõe através de uma API.
 
 Frontend (Dashboard Web): Uma interface de usuário construída em HTML, CSS e JavaScript que consome a API do backend para exibir os dados de forma visual e interativa para os gestores.
 
